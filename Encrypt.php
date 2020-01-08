@@ -2,6 +2,7 @@
 require "vendor/autoload.php";
 use \Firebase\JWT\JWT;
 
+
 $privateKey = <<<EOD
 -----BEGIN PRIVATE KEY-----
 MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCzjMZTUQPhG/zc
@@ -34,45 +35,14 @@ tiIIqp5TfmWX9bRmmQZ/uI87
 
 EOD;
 
-$publicKey = <<<EOD
------BEGIN CERTIFICATE-----
-MIIDAzCCAeugAwIBAgIUWKdMeJMPc/70HbfE8g0oh6Mk53swDQYJKoZIhvcNAQEL
-BQAwETEPMA0GA1UEAwwGQVBQX0hTMB4XDTE5MTEyNzE0MDYxMVoXDTIwMTEyNjE0
-MDYxMVowETEPMA0GA1UEAwwGQVBQX0hTMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A
-MIIBCgKCAQEAs4zGU1ED4Rv83H5kmNqL1KuICqtrfTcAskRAEwsB5yMoYBBZrutQ
-yq0mDcBHc/51hbkJQ8IQ21Acbp+6BZQ6PvMnu9e5cHtKBFxwgws7K97H6hLQe6go
-mH1w3c2IjluOHWLPt+lnaM0dviapA5m0bhLEuxJ5EEPyq/ADo74PWLaluJjVnzbM
-+wBgXD3EuZUYt0LeoLoUHaYmDQ0faTdE+OxECar0cRrnrLK5tcKpiv8dzG52ceAW
-VD1e1Fua4LlDO9xycj8piX9AdCGTCrOBoBAYnRui5Ph2WRrJ69zX2UH2HF++9K6h
-UPsorGM/UVsVErQPcxbEf8FCsJO/HddzCwIDAQABo1MwUTAdBgNVHQ4EFgQUrAm6
-J0DpNVunhhHMzEzDrV/tpIkwHwYDVR0jBBgwFoAUrAm6J0DpNVunhhHMzEzDrV/t
-pIkwDwYDVR0TAQH/BAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAHSem6moRm1uN
-AhmCP+R/Bmo9os14BwFV81ZJYofXcBJ/XKtrj9cDQEg3fP4d2rl24qFT5RcX+2/2
-8Kwq1NMG77pD1ZtDoJ3Ano3emGRGAaGsOuC57FwxYDiXgvCejLSb2S6DDpmZV7Lk
-nKx7FbC8qrKLl5JvqCAFGuSmByQa/3BkV9qD3MI8Z8KBlemfijd0h4W1apcz6L+m
-YsiguoKM2uzl3yFkS/1cG0QWjKiqYRFHHRMgwk8y8p6IlUODpkLM8PTXju4JvBTT
-ueYg+szojcBAAi2NpbN23rUtQ2Bs4nXc968aQjmImdlgoJAaOAyiJknCbl5LsHTe
-D0AlbgozVA==
------END CERTIFICATE-----
-EOD;
-
 $token = array(
     "iss" => "example.org",
-    "aud" => "example.com",
-    "iat" => 1340452126,
-    "nbf" => 1340451826
+    "aud" => "http://apigateway/api/oauth/token",
+    "exp" => 1340452126,
+    "iat" => 1340451826
 );
 
-$jwt = JWT::encode($token, $privateKey, 'RS256');
+
+$jwt = JWT::encode($token2, $privateKey, 'RS256');
 echo "Encode:\n" . print_r($jwt, true) . "\n";
-
-$decoded = JWT::decode($jwt, $publicKey, array('RS256'));
-
-/*
- NOTE: This will now be an object instead of an associative array. To get
- an associative array, you will need to cast it as such:
-*/
-
-$decoded_array = (array) $decoded;
-echo "Decode:\n" . print_r($decoded_array, true) . "\n";
 ?>
