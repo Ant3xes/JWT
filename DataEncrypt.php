@@ -32,4 +32,11 @@ tiIIqp5TfmWX9bRmmQZ/uI87
 
 EOD;
 
+$token = array(
+    "iss" => "example.org",
+    "aud" => "http://apigateway/api/oauth/token",
+    "exp" => $exp,
+    "iat" => $iat
+);
+
 ?>
