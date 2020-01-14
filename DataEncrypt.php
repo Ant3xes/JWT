@@ -1,5 +1,8 @@
 <?php
 
+$iat = time();
+$exp = $iat + 300;
+
 $privateKey = <<<EOD
 -----BEGIN PRIVATE KEY-----
 MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCzjMZTUQPhG/zc
